@@ -70,20 +70,20 @@ namespace Agenda.Application.Services
              throw new KeyNotFoundException($"Contato com o ID {id} não encontrado.");
 
 
-            // Atualizar apenas os campos permitidos (Email e Telefone)
-            _mapper.Map(contatoInput, contatoExistente);
+   
+                _mapper.Map(contatoInput, contatoExistente);
 
-            contatoExistente = await _contatoRepository.UpdateAsync(contatoExistente);
+                contatoExistente = await _contatoRepository.UpdateAsync(contatoExistente);
+    
+                if (contatoExistente == null)
+                    throw new InvalidOperationException("Erro ao atualizar o contato.");
 
-            if (contatoExistente == null)
-                throw new InvalidOperationException("Erro ao atualizar o contato.");
+                return _mapper.Map<ContatoViewModel>(contatoExistente);
+           }
 
-            return _mapper.Map<ContatoViewModel>(contatoExistente);
-        }
-
-        public async Task<bool> DeleteAsync(int id)
-        {
-            return await _contatoRepository.DeleteAsync(id);
-        }
+         public async Task<bool> DeleteAsync(int id)
+          {
+                return await _contatoRepository.DeleteAsync(id);
+          }
     }
 }

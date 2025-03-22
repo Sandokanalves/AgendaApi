@@ -2,11 +2,7 @@
 using Agenda.Domain.Interfaces;
 using Agenda.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Agenda.Infrastructure.Repositories
 {

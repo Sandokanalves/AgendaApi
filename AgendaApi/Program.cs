@@ -23,6 +23,8 @@ builder.Services.AddScoped<IValidator<CreateContatoInputModel>, ContatoInputVali
 builder.Services.AddScoped<IValidator<UpdateContatoInput>, UpdateContatoInputValidator>();
 
 
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -44,10 +46,9 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddAutoMapper(typeof(ContatoMappingProfile));
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-//builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddFluentValidationAutoValidation() // Adiciona validação automática
-    .AddFluentValidationClientsideAdapters() // Adiciona adaptadores de validação para o lado do cliente (opcional, caso deseje validação no front-end)
+
+builder.Services.AddFluentValidationAutoValidation() 
+    .AddFluentValidationClientsideAdapters() 
     .AddValidatorsFromAssemblyContaining<Program>();
 var app = builder.Build();
 
