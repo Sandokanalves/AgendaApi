@@ -21,7 +21,7 @@ namespace Agenda.Infrastructure.Repositories
 
         public async Task<IEnumerable<Contato>> GetAllAsync()
         {
-            return await _agendaContext.Contatos.ToListAsync();
+            return await _agendaContext.Contatos.AsNoTracking().ToListAsync();
         }
 
         public async Task<Contato> GetByIdAsync(int id)
@@ -29,26 +29,28 @@ namespace Agenda.Infrastructure.Repositories
             return await _agendaContext.Contatos.FindAsync(id);
         }
 
-        public async Task AddAsync(Contato contato)
+        public async Task<Contato> AddAsync(Contato contato)
         {
             _agendaContext.Contatos.Add(contato);
             await _agendaContext.SaveChangesAsync();
+            return contato;
         }
 
-        public async Task UpdateAsync(Contato contato)
+        public async Task<Contato> UpdateAsync(Contato contato)
         {
             _agendaContext.Contatos.Update(contato);
             await _agendaContext.SaveChangesAsync();
+            return contato;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
-            var contato = await _agendaContext.Contatos.FindAsync(id);
-            if (contato != null)
-            {
-                _agendaContext.Contatos.Remove(contato);
-                await _agendaContext.SaveChangesAsync();
-            }
+            var contato = await GetByIdAsync(id);
+            if (contato == null) return false;
+
+            _agendaContext.Contatos.Remove(contato);
+            await _agendaContext.SaveChangesAsync();
+            return true;
         }
     }
 }

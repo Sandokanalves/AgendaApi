@@ -9,9 +9,11 @@ namespace Agenda.Domain.Interfaces
 {
     public interface IContatoRepository
     {
+       
         Task<IEnumerable<Contato>> GetAllAsync();
         Task<Contato> GetByIdAsync(int id);
-        Task AddAsync(Contato contato);
-        Task DeleteAsync(int id);
+        Task<Contato> AddAsync(Contato contato); 
+        Task<Contato> UpdateAsync(Contato contato);
+        Task<bool> DeleteAsync(int id);
     }
 }
