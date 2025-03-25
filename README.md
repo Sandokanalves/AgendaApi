@@ -58,7 +58,7 @@ Obs: No Program.cs está configurado para usar o Swagger como documentação.
 1. **Clone o repositório**:
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone <[URL_DO_REPOSITORIO](https://github.com/Sandokanalves/AgendaApi.git)>
 ```
 
 2. **Restaure os pacotes do projeto**:
