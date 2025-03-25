@@ -3,7 +3,6 @@ using Agenda.Application.DTOS.InputModels;
 using Agenda.Application.Mappings;
 using Agenda.Application.Services;
 using Agenda.Application.Validators;
-using Agenda.Domain.Interfaces;
 using Agenda.Infrastructure.Data;
 using Agenda.Infrastructure.Repositories;
 using FluentValidation;
@@ -21,7 +20,6 @@ builder.Services.AddScoped<IContatoRepository, ContatoRepository>();
 builder.Services.AddScoped<IContatoService, ContatoService>();
 builder.Services.AddScoped<IValidator<CreateContatoInputModel>, ContatoInputValidator>();
 builder.Services.AddScoped<IValidator<UpdateContatoInput>, UpdateContatoInputValidator>();
-
 
 
 
