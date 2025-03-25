@@ -15,6 +15,22 @@ namespace Agenda.Application.Validators
             RuleFor(c => c.Telefone)
                 .NotEmpty().WithMessage("O telefone é obrigatório.")
                 .Length(8, 15).WithMessage("O telefone deve ter entre 8 e 15 caracteres.");
+
+            RuleFor(c => c.Endereco)
+              .NotEmpty().WithMessage("O endereço é obrigatório.")
+              .MaximumLength(200).WithMessage("O endereço deve ter no máximo 200 caracteres.");
+
+            RuleFor(c => c.DataNascimento)
+                .NotEmpty().WithMessage("A data de nascimento é obrigatória.")
+                .LessThan(DateTime.Now).WithMessage("A data de nascimento deve ser no passado.");
+
+            RuleFor(c => c.Site)
+                .MaximumLength(100).WithMessage("O site deve ter no máximo 100 caracteres.")
+                .When(c => !string.IsNullOrEmpty(c.Site));
+
+            RuleFor(c => c.TelefoneComercial)
+                .MaximumLength(15).WithMessage("O telefone comercial deve ter no máximo 15 caracteres.")
+                .When(c => !string.IsNullOrEmpty(c.TelefoneComercial));
         }
     }
 }

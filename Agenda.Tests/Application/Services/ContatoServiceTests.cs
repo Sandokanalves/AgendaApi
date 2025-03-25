@@ -1,7 +1,7 @@
 ﻿using Agenda.Application.Services;
 using Agenda.Application.DTOS.InputModels;
 using Agenda.Domain.Entities;
-using Agenda.Domain.Interfaces;
+using Agenda.Application.Interfaces;
 using AutoMapper;
 using FluentValidation;
 using Moq;
@@ -36,7 +36,11 @@ public class ContatoServiceTests
         {
             Nome = "Nome do Contato",
             Email = "email@gmail.com",
-            Telefone = "(81) 99292-7867"
+            Telefone = "(81) 99292-7867",
+            Endereco = "Rua A, 123",
+            DataNascimento = new DateTime(1990, 5, 10),
+            Site = "https://joaosite.com",
+            TelefoneComercial = "987654321"
         };
 
         var contato = new Contato
@@ -44,10 +48,14 @@ public class ContatoServiceTests
             Id = 1,
             Nome = inputModel.Nome,
             Email = inputModel.Email,
-            Telefone = inputModel.Telefone
+            Telefone = inputModel.Telefone,
+             Endereco = "Rua A, 123",
+            DataNascimento = new DateTime(1990, 5, 10),
+            Site = "https://joaosite.com",
+            TelefoneComercial = "987654321"
         };
 
-        var contatoViewModel = new ContatoViewModel(contato.Id, inputModel.Nome);
+        var contatoViewModel = new ContatoViewModel(contato.Id, inputModel.Nome, contato.Email, contato.Telefone);
 
         
         _validatorMock.Setup(v => v.ValidateAsync(inputModel, default))
@@ -80,7 +88,11 @@ public class ContatoServiceTests
         var inputModel = new UpdateContatoInput
         {
             Email = "email@gmail.com",
-            Telefone = "(81) 99999-8888"
+            Telefone = "123456789",
+            Endereco = "Rua A, 123",
+            DataNascimento = new DateTime(1990, 5, 10),
+            Site = "https://joaosite.com",
+            TelefoneComercial = "987654321"
         };
 
         var contatoExistente = new Contato
@@ -88,16 +100,24 @@ public class ContatoServiceTests
             Id = 1,
             Nome = "Nome Antigo",
             Email = "antigoemail@gmail.com",
-            Telefone = "(81) 98888-7777"
+            Telefone = "123456789",
+            Endereco = "Rua A, 123",
+            DataNascimento = new DateTime(1990, 5, 10),
+            Site = "https://joaosite.com",
+            TelefoneComercial = "987654321"
         };
 
         var contatoAtualizado = new Contato
         {
             Id = 1,
             Email = inputModel.Email,
-            Telefone = inputModel.Telefone
+            Telefone = inputModel.Telefone,
+            Endereco = inputModel.Endereco,
+            DataNascimento = inputModel.DataNascimento,
+            Site = inputModel.Site,
+            TelefoneComercial = inputModel.TelefoneComercial
         };
-        var contatoViewModel = new ContatoViewModel(contatoAtualizado.Id, contatoExistente.Nome);
+        var contatoViewModel = new ContatoViewModel(contatoAtualizado.Id, contatoExistente.Nome, contatoExistente.Email,contatoExistente.Telefone);
 
        
         _updatevalidatorMock.Setup(v => v.ValidateAsync(It.IsAny<UpdateContatoInput>(), default))
@@ -134,7 +154,11 @@ public class ContatoServiceTests
             Id = 1,
             Nome = "Nome para Excluir",
             Email = "emailparaexcluir@gmail.com",
-            Telefone = "(81) 99292-1111"
+            Telefone = "123456789",
+            Endereco = "Rua A, 123",
+            DataNascimento = new DateTime(1990, 5, 10),
+            Site = "https://joaosite.com",
+            TelefoneComercial = "987654321"
         };
          
 
@@ -165,7 +189,7 @@ public class ContatoServiceTests
                               .ReturnsAsync(contatos);
 
         
-        var contatoViewModels = contatos.Select(c => new ContatoViewModel(c.Id, c.Nome)).ToList();
+        var contatoViewModels = contatos.Select(c => new ContatoViewModel(c.Id, c.Nome, c.Email, c.Telefone)).ToList();
 
         _mapperMock.Setup(m => m.Map<IEnumerable<ContatoViewModel>>(contatos))
                    .Returns(contatoViewModels);

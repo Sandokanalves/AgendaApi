@@ -19,9 +19,11 @@ namespace Agenda.Application.Mappings
             
             CreateMap<Contato, ContatoViewModel>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome));
+                .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.Nome))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.Telefone));
 
-            
+
             CreateMap<Contato, ContatoDetailsViewModel>();
         }
     }

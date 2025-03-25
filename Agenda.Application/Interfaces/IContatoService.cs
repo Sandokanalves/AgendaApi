@@ -2,7 +2,7 @@
 using Agenda.Application.DTOS.InputModels;
 
 
-namespace Agenda.Application.Services
+namespace Agenda.Application.Interfaces
 {
     public interface IContatoService
     {

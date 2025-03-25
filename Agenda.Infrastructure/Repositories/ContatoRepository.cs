@@ -1,5 +1,5 @@
 ﻿using Agenda.Domain.Entities;
-using Agenda.Domain.Interfaces;
+using Agenda.Application.Interfaces;
 using Agenda.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 

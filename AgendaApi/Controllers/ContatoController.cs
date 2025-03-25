@@ -2,14 +2,15 @@
 using FluentValidation;
 using global::Agenda.Application.DTOS.InputModels;
 using global::Agenda.Application.Services;
-
+using Agenda.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AgendaApi.Controllers
 {
 
-  
 
-        [ApiController]
+    
+    [ApiController]
         [Route("api/[controller]")]
         public class ContatoController : ControllerBase
         {
@@ -58,7 +59,8 @@ namespace AgendaApi.Controllers
 
             // POST: api/contato
             [HttpPost]
-            public async Task<IActionResult> Create([FromBody] CreateContatoInputModel model)
+        [Authorize]
+        public async Task<IActionResult> Create([FromBody] CreateContatoInputModel model)
             {
                 try
                 {
@@ -77,9 +79,9 @@ namespace AgendaApi.Controllers
                     return StatusCode(500, new { Message = "Erro ao criar o contato.", Error = ex.Message });
                 }
             }
-
-            // PUT: api/contato/{id}
-            [HttpPut("{id:int}")]
+        [Authorize]
+        // PUT: api/contato/{id}
+        [HttpPut("{id:int}")]
             public async Task<IActionResult> Update(int id, [FromBody] UpdateContatoInput model)
             {
                 try
@@ -102,9 +104,9 @@ namespace AgendaApi.Controllers
                     return StatusCode(500, new { Message = "Erro ao atualizar o contato.", Error = ex.Message });
                 }
             }
-
-            // DELETE: api/contato/{id}
-            [HttpDelete("{id:int}")]
+        [Authorize]
+        // DELETE: api/contato/{id}
+        [HttpDelete("{id:int}")]
             public async Task<IActionResult> Delete(int id)
             {
                 try

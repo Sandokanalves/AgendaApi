@@ -1,8 +1,8 @@
 ﻿
 using Agenda.Application.DTOS.InputModels;
 using Agenda.Application.DTOS.ViewModels;
+using Agenda.Application.Interfaces;
 using Agenda.Domain.Entities;
-using Agenda.Domain.Interfaces;
 using AutoMapper;
 using FluentValidation;
 
@@ -33,10 +33,7 @@ namespace Agenda.Application.Services
             }
 
             var contatoViewModels = _mapper.Map<IEnumerable<ContatoViewModel>>(contatos);
-            foreach (var contato in contatoViewModels)
-            {
-                Console.WriteLine($"Contato: {contato.Id}, {contato.Nome}");
-            }
+           
 
             return contatoViewModels;
         }
